@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de TMB</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de TMB</h1>
+        <form id="tmbForm">
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" required>
+                <option value="homem">Homem</option>
+                <option value="mulher">Mulher</option>
+            </select>
+
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" required>
+
+            <label for="altura">Altura (cm):</label>
+            <input type="number" id="altura" required>
+
+            <label for="idade">Idade (anos):</label>
+            <input type="number" id="idade" required>
+
+            <button type="button" onclick="calcularTMB()">Calcular TMB</button>
+        </form>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularTMB() {
+            const sexo = document.getElementById('sexo').value;
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            const idade = parseInt(document.getElementById('idade').value);
+            let tmb;
+
+            if (sexo === 'homem') {
+                tmb = 66 + (13.7 * peso) + (5 * altura) - (6.8 * idade);
+            } else if (sexo === 'mulher') {
+                tmb = 655 + (9.6 * peso) + (1.8 * altura) - (4.7 * idade);
+            } else {
+                tmb = 'Selecione um sexo válido';
+            }
+
+            document.getElementById('resultado').innerText = `Sua TMB é aproximadamente ${Math.round(tmb)} calorias por dia.`;
+        }
+    </script>
+</body>
+</html>
